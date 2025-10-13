@@ -1,0 +1,7 @@
+services: 
+  go: 
+    build: 
+      context: .
+    command: sleep infinity
+    volumes: 
+      - .:/workspaces/golang-backend-api:cached
