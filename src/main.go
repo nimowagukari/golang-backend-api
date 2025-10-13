@@ -1,11 +1,18 @@
 package main
 
-import "fmt"
+import (
+	"fmt"
+	"log"
+	"net/http"
+)
 
-func greeting(name string) string {
-	return fmt.Sprintf(`Hello, %s`, name)
+type helloWorldHandler struct{}
+
+func (h *helloWorldHandler) ServeHTTP(w http.ResponseWriter, r *http.Request) {
+	fmt.Fprint(w, "Hello,World.")
 }
 
 func main() {
-	fmt.Println(greeting("Hoge"))
+	http.Handle("/", &helloWorldHandler{})
+	log.Fatal(http.ListenAndServe(":8080", nil))
 }
